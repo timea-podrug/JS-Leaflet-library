@@ -1,6 +1,6 @@
 :root {
-  --color-brand--1: #ffb545;
-  --color-brand--2: #00c46a;
+  --color-brand--1: #609966;
+  --color-brand--2: #3887be;
 
   --color-dark--1: #2d3439;
   --color-dark--2: #42484d;
@@ -33,25 +33,17 @@ body {
   display: flex;
 }
 
-/* GENERAL */
 a:link,
 a:visited {
   color: var(--color-brand--1);
 }
 
-/* SIDEBAR */
 .sidebar {
   flex-basis: 50rem;
   background-color: var(--color-dark--1);
   padding: 3rem 5rem 4rem 5rem;
   display: flex;
   flex-direction: column;
-}
-
-.logo {
-  height: 5.2rem;
-  align-self: center;
-  margin-bottom: 4rem;
 }
 
 .places {
@@ -76,10 +68,10 @@ a:visited {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 0.75rem 1.5rem;
 }
-.place_cafe {
+.place--cafe {
   border-left: 5px solid var(--color-brand--2);
 }
-.place_restaurant {
+.place--restaurant {
   border-left: 5px solid var(--color-brand--1);
 }
 
@@ -122,7 +114,6 @@ a:visited {
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem 2.5rem;
 
-  /* Match height and activity boxes */
   height: 9.25rem;
   transition: all 0.5s, transform 1ms;
 }
@@ -170,14 +161,12 @@ a:visited {
   display: none;
 }
 
-/* MAP */
 #map {
   flex: 1;
   height: 100%;
   background-color: var(--color-light--1);
 }
 
-/*Popup width is defined in JS using options*/
 .leaflet-popup .leaflet-popup-content-wrapper {
   background-color: var(--color-dark--1);
   color: var(--color-light--2);
@@ -194,8 +183,8 @@ a:visited {
 }
 
 .restaurant-popup .leaflet-popup-content-wrapper {
-  border-left: 5px solid var(--color-brand--2);
+  border-left: 5px solid var(--color-brand--1);
 }
 .cafe-popup .leaflet-popup-content-wrapper {
-  border-left: 5px solid var(--color-brand--1);
+  border-left: 5px solid var(--color-brand--2);
 }

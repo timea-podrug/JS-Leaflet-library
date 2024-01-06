@@ -193,9 +193,9 @@ a:visited {
   background-color: var(--color-dark--1);
 }
 
-.running-popup .leaflet-popup-content-wrapper {
+.restourant-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--2);
 }
-.cycling-popup .leaflet-popup-content-wrapper {
+.cafe-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--1);
 }

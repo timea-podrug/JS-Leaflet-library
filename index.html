@@ -26,47 +26,39 @@
     ></script>
 
     <script defer src="script.js"></script>
-    <title>mapty // Map your workouts</title>
+    <title>Mark your dining spots</title>
   </head>
   <body>
     <div id="map"></div>
 
     <div class="sidebar">
-      <img src="logo.png" alt="Logo" class="logo" />
-
       <ul class="workouts">
         <form class="form hidden">
           <div class="form__row">
             <label class="form__label">Type</label>
             <select class="form__input form__input--type">
-              <option value="running">Running</option>
-              <option value="cycling">Cycling</option>
+              <option value="cafe">Cafe</option>
+              <option value="restourant">Restourant</option>
             </select>
           </div>
           <div class="form__row">
-            <label class="form__label">Distance</label>
-            <input class="form__input form__input--distance" placeholder="km" />
-          </div>
-          <div class="form__row">
-            <label class="form__label">Duration</label>
+            <label class="form__label">Stars</label>
             <input
-              class="form__input form__input--duration"
-              placeholder="min"
+              class="form__input form__input--stars"
+              placeholder="number"
             />
           </div>
           <div class="form__row">
-            <label class="form__label">Cadence</label>
-            <input
-              class="form__input form__input--cadence"
-              placeholder="step/min"
-            />
+            <label class="form__label">Name</label>
+            <input class="form__input form__input--name" />
+          </div>
+          <div class="form__row">
+            <label class="form__label">Ambiance</label>
+            <input class="form__input form__input--ambiance" />
           </div>
           <div class="form__row form__row--hidden">
-            <label class="form__label">Elev Gain</label>
-            <input
-              class="form__input form__input--elevation"
-              placeholder="meters"
-            />
+            <label class="form__label">Cuisine</label>
+            <input class="form__input form__input--cuisine" />
           </div>
           <button class="form__btn">OK</button>
         </form>

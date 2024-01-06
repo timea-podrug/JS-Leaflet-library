@@ -65,7 +65,7 @@ a:visited {
   width: 0;
 }
 
-.places {
+.place {
   background-color: var(--color-dark--2);
   border-radius: 5px;
   padding: 1.5rem 2.25rem;
@@ -76,10 +76,10 @@ a:visited {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 0.75rem 1.5rem;
 }
-.places_cafe {
+.place_cafe {
   border-left: 5px solid var(--color-brand--2);
 }
-.places_restourant {
+.place_restaurant {
   border-left: 5px solid var(--color-brand--1);
 }
 
@@ -193,7 +193,7 @@ a:visited {
   background-color: var(--color-dark--1);
 }
 
-.restourant-popup .leaflet-popup-content-wrapper {
+.restaurant-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--2);
 }
 .cafe-popup .leaflet-popup-content-wrapper {

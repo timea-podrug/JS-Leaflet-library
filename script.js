@@ -4,7 +4,7 @@
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const form = document.querySelector(".form");
-const containerWorkouts = document.querySelector(".workouts");
+const containerPlaces = document.querySelector(".places");
 const inputType = document.querySelector(".form__input--type");
 const inputStars = document.querySelector(".form__input--stars");
 const inputCuisine = document.querySelector(".form__input--cuisine");
@@ -21,19 +21,26 @@ class Place {
     this.stars = stars;
     this.name = name;
   }
+  _setDescription() {
+    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} - ${
+      this.name
+    }`;
+  }
 }
 class Cafe extends Place {
-  type = "Cafe";
+  type = "cafe";
   constructor(coords, stars, name, ambiance) {
     super(coords, stars, name);
     this.ambiance = ambiance;
+    this._setDescription();
   }
 }
-class Restourant extends Place {
-  type = "Restourant";
+class Restaurant extends Place {
+  type = "restaurant";
   constructor(coords, stars, name, cuisine) {
     super(coords, stars, name);
     this.cuisine = cuisine;
+    this._setDescription();
   }
 }
 
@@ -76,10 +83,6 @@ class App {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
 
-    L.marker(coords)
-      .addTo(this.#map)
-      .bindPopup("A pretty CSS popup.<br> Easily customizable.")
-      .openPopup();
     //we don't use eventListener because leafled has its own build in function on
     this.#map.on("click", this._showForm.bind(this));
   }
@@ -88,6 +91,18 @@ class App {
     this.#mapEvent = mapE;
     form.classList.remove("hidden");
     inputStars.focus();
+  }
+
+  _hideForm() {
+    //Emptying the inputs
+    inputStars.value =
+      inputName.value =
+      inputCuisine.value =
+      inputAmbiance.value =
+        "";
+    form.style.display = "none";
+    form.classList.add("hidden");
+    setTimeout(() => (form.style.display = "grid"), 1000);
   }
 
   _toggleAmbianceField() {
@@ -117,15 +132,15 @@ class App {
       place = new Cafe([lat, lng], stars, name, ambiance);
     }
 
-    //If the place is a restourant, create restourant object
-    if (type === "restourant") {
+    //If the place is a restaurant, create restaurant object
+    if (type === "restaurant") {
       const cuisine = inputCuisine.value;
 
       //Checking if data is correct
       // if (!String(name) || !Number.isFinite(stars) || !String(cuisine)) {
       //   return alert("Invalid inputs");
       // }
-      place = new Restourant([lat, lng], stars, name, cuisine);
+      place = new Restaurant([lat, lng], stars, name, cuisine);
     }
 
     //Add the new object to the the places array
@@ -133,17 +148,13 @@ class App {
 
     //Render the place on map as marker
     //we want to get the new latitude and longitude of the clicked position, they are stored in the latlng object
-    this.renderPlaceMarker(place);
+    this._renderPlaceMarker(place);
     //Render the place on the list
-
+    this._renderPlace(place);
     //Hide the form and clear the input fields
-    inputStars.value =
-      inputName.value =
-      inputCuisine.value =
-      inputAmbiance.value =
-        "";
+    this._hideForm();
   }
-  renderPlaceMarker(place) {
+  _renderPlaceMarker(place) {
     L.marker(place.coords)
       .addTo(this.#map)
       .bindPopup(
@@ -153,9 +164,52 @@ class App {
           className: `${place.type}-popup`,
         })
       )
-      .setPopupContent("name")
+      .setPopupContent(`🏙️ ${place.description}`)
       .openPopup();
     console.log(place);
+  }
+
+  _renderPlace(place) {
+    let html = `
+    <li class="place place--${place.type}" data-id="${place.id}">
+    <h2 class="place__title">${place.description}</h2>
+    
+    <div class="place__details">
+      <span class="place__icon">🔠</span>
+      <span class="place__value">${place.name}</span>
+      
+    </div>`;
+    if (place.type === "restaurant") {
+      html += `
+      </div>
+      <div class="place__details">
+        <span class="place__icon">⭐</span>
+        <span class="place__value">${place.stars}</span>
+        
+      </div>
+      <div class="place__details">
+        <span class="place__icon">🗺️</span>
+        <span class="place__value">${place.cuisine}</span>
+        
+      </div>
+    </li>`;
+      form.insertAdjacentHTML("afterend", html);
+    }
+    if (place.type === "cafe") {
+      html += `
+      <div class="place__details">
+        <span class="place__icon">⭐</span>
+        <span class="place__value">${place.stars}</span>
+        
+      </div>
+      <div class="place__details">
+        <span class="place__icon">🔥</span>
+        <span class="place__value">${place.ambiance}</span>
+        
+      </div>
+    </li>`;
+      form.insertAdjacentHTML("afterend", html);
+    }
   }
 }
 

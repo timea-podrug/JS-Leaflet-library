@@ -1,5 +1,8 @@
 # Café/Restaurant Marking Tool
 
+![image](https://github.com/timea-podrug/JS-Leaflet-library/assets/108535463/e576c332-7c6d-4e74-9f18-996ecba57435)
+
+
 This project, developed as part of a school programming assignment, leverages JavaScript and the Leaflet library to create a map interface for marking and saving favorite café and restaurant locations.
 
 ## Features
